@@ -23,6 +23,10 @@ employeeResumes = handlers.DataHandler().setAllCharactersToLowerCase(employeeRes
 # task 6 - filter the resumes into just the skills
 filteredEmployeeResumes = handlers.DataHandler().filterData(employeeResumes, filter = "skills")
 
+# task 7 - create a model to cluster the resumes
 
+
+# task 8 - create a model to score the resumes
+targets = handlers.SupervisedMlHandler().createTargetsForData(filteredEmployeeResumes)
 print("[INFO] records loaded")
 
