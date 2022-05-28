@@ -18,7 +18,7 @@ employeeResumes = handlers.DataHandler().compressAnnotatedDetails(employeeResume
 employeeResumes = handlers.DataHandler().stripInvalidCharacters(employeeResumes)
 
 # task 5 - set all characters to lowercase
-# todo 
+employeeResumes = handlers.DataHandler().setAllCharactersToLowerCase(employeeResumes)
 
 print("[INFO] records loaded")
 

@@ -41,6 +41,15 @@ class DataHandler:
                     pass
         return data
 
+
+    def setAllCharactersToLowerCase(self, data):
+        for resumeIndex, resume in enumerate(data):
+            for detailIndex, details in enumerate(resume):
+                for key in details.keys():
+                    data[resumeIndex][detailIndex][key] = str(details[key]).lower()
+        return data
+
+
     def removeSpecialCharactersFromStr(self, string):
         clean = regex.sub(pattern="[^A-Za-z0-9]+", repl=" ", string=string) # didn't specify whether to clean '+'
         return clean
