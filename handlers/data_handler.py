@@ -27,25 +27,33 @@ class DataHandler:
             compressedData.append(newDetails)
         return compressedData
 
-    def stripInvalidCharacters(self, data : [{}]):
+
+    # similar to the map function; breaks if data is not in the right order
+    def _applyFunctionToAllValues(self, func, data) -> [{}]:
         for resumeIndex, resume in enumerate(data):
             for detailIndex, details in enumerate(resume):
                 for key in details.keys():
-                    data[resumeIndex][detailIndex][key] = self.removeSpecialCharactersFromStr(str(details[key]))
+                    data[resumeIndex][detailIndex][key] = func(str(details[key]))
         return data
 
 
-    def setAllCharactersToLowerCase(self, data):
-        for resumeIndex, resume in enumerate(data):
-            for detailIndex, details in enumerate(resume):
-                for key in details.keys():
-                    data[resumeIndex][detailIndex][key] = str(details[key]).lower()
+    def stripInvalidCharacters(self, data : [{}]) -> [{}] :
+        data = self._applyFunctionToAllValues(func = self.removeSpecialCharactersFromStr, data = data)
+        return data
+
+    def setAllCharactersToLowerCase(self, data: [{}]) -> [{}]:
+        data = self._applyFunctionToAllValues(func = str.lower, data = data)
         return data
 
 
-    def removeSpecialCharactersFromStr(self, string):
+    def removeSpecialCharactersFromStr(self, string : str) -> str:
         clean = regex.sub(pattern="[^A-Za-z0-9]+", repl=" ", string=string) # didn't specify whether to clean '+'
         return clean
+
+    def changeFormatOfKeyPhrases(self, data):
+        # todo
+        return data
+
 
     @staticmethod
     def _saneData(data: [{}], key: str) -> bool:
@@ -78,3 +86,4 @@ class DataHandler:
 
     def filterEmployeeRecords(self, data: [{}], filters: [str]) -> [{}]:
         pass # todo
+

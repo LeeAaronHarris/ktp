@@ -11,7 +11,7 @@ employeeResumes = handlers.DataHandler().compressAnnotatedDetails(employeeResume
 
 # task 3
 # replace the special characters that we want to keep (e.g., c++) with other strings (e.g., 2c)
-# todo
+employeeResumes = handlers.DataHandler().changeFormatOfKeyPhrases(employeeResumes)
 
 # task 4 - remove all special characters
 # keep the characters that are valid, rather than removing those that aren't
