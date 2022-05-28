@@ -9,9 +9,16 @@ employeeResumes = handlers.EmployeeRecordHandler(pathToEmployeeRecords).load().g
 employeeResumes = handlers.DataHandler().getAnnotatedDetails(employeeResumes)
 employeeResumes = handlers.DataHandler().compressAnnotatedDetails(employeeResumes)
 
-# task 3 - remove all special characters
+# task 3
+# replace the special characters that we want to keep (e.g., c++) with other strings (e.g., 2c)
+# todo
+
+# task 4 - remove all special characters
 # keep the characters that are valid, rather than removing those that aren't
 employeeResumes = handlers.DataHandler().stripInvalidCharacters(employeeResumes)
+
+# task 5 - set all characters to lowercase
+# todo 
 
 print("[INFO] records loaded")
 

@@ -1,5 +1,4 @@
-NEWLINE_SEP = "\n"
-
+import re as regex
 
 class DataHandler:
 
@@ -27,6 +26,24 @@ class DataHandler:
                 newDetails.append(compressedDetails)
             compressedData.append(newDetails)
         return compressedData
+
+    def stripInvalidCharacters(self, data):
+        for resumeIndex, resume in enumerate(data):
+            for detailIndex, details in enumerate(resume):
+                try:
+                    data[resumeIndex][detailIndex]['label'] = self.removeSpecialCharactersFromStr(details['label'])
+                except:
+                    pass
+
+                try:
+                    data[resumeIndex][detailIndex]['text'] = self.removeSpecialCharactersFromStr(details['text'])
+                except:
+                    pass
+        return data
+
+    def removeSpecialCharactersFromStr(self, string):
+        clean = regex.sub(pattern="[^A-Za-z0-9]+", repl=" ", string=string) # didn't specify whether to clean '+'
+        return clean
 
     @staticmethod
     def _saneData(data: [{}], key: str) -> bool:
@@ -56,3 +73,6 @@ class DataHandler:
             return False
 
         return True
+
+    def filterEmployeeRecords(self, data: [{}], filters: [str]) -> [{}]:
+        pass # todo
