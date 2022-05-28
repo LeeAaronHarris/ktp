@@ -20,5 +20,9 @@ employeeResumes = handlers.DataHandler().stripInvalidCharacters(employeeResumes)
 # task 5 - set all characters to lowercase
 employeeResumes = handlers.DataHandler().setAllCharactersToLowerCase(employeeResumes)
 
+# task 6 - filter the resumes into just the skills
+filteredEmployeeResumes = handlers.DataHandler().filterData(employeeResumes, filter = "skills")
+
+
 print("[INFO] records loaded")
 
