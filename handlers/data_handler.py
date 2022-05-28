@@ -27,18 +27,11 @@ class DataHandler:
             compressedData.append(newDetails)
         return compressedData
 
-    def stripInvalidCharacters(self, data):
+    def stripInvalidCharacters(self, data : [{}]):
         for resumeIndex, resume in enumerate(data):
             for detailIndex, details in enumerate(resume):
-                try:
-                    data[resumeIndex][detailIndex]['label'] = self.removeSpecialCharactersFromStr(details['label'])
-                except:
-                    pass
-
-                try:
-                    data[resumeIndex][detailIndex]['text'] = self.removeSpecialCharactersFromStr(details['text'])
-                except:
-                    pass
+                for key in details.keys():
+                    data[resumeIndex][detailIndex][key] = self.removeSpecialCharactersFromStr(str(details[key]))
         return data
 
 
