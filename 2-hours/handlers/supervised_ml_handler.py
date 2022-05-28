@@ -11,6 +11,3 @@ class SupervisedMlHandler:
             targets[instanceIndex, classIndex] = 1 # random class
 
         return targets
-
-    def assignScoreToEachClass(self, classNames : [str]):
-        return "" # todo

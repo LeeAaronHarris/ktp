@@ -25,19 +25,11 @@ filteredEmployeeResumes_skills = handlers.DataHandler().filterData(employeeResum
 filteredEmployeeResumes_qualifications = handlers.DataHandler().filterData(employeeResumes, filter = "degree")
 filteredEmployeeResumes_jobs = handlers.DataHandler().filterData(employeeResumes, filter = "companies worked at")
 
+print("tmp")
 # task 7 - create a model to cluster the resumes
-# sparse bag of words
-skill_counts = handlers.UnsupervisedMlHandler().count(data = filteredEmployeeResumes_skills)
-qualification_counts = handlers.UnsupervisedMlHandler().count(data = filteredEmployeeResumes_qualifications)
-jobs_counts = handlers.UnsupervisedMlHandler().count(data = filteredEmployeeResumes_jobs)
+
 
 # task 8 - create a model to score the resumes
-targets = handlers.SupervisedMlHandler().createTargetsForData(filteredEmployeeResumes_skills)
+targets = handlers.SupervisedMlHandler().createTargetsForData(filteredEmployeeResumes)
+print("[INFO] records loaded")
 
-# task 9 - create a data frame of the class for each employee
-classNames = ["testing", "development", "management"]
-singleLabelledResumes = handlers.DataHandler().assignClassnamesToResumes(targets, classNames)
-multiLabelledResumes = handlers.SupervisedMlHandler().assignScoreToEachClass(classNames)
-
-print(multiLabelledResumes)
-print(singleLabelledResumes)

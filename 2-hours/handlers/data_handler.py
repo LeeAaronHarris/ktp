@@ -1,7 +1,5 @@
 import re as regex
 
-import numpy as np
-import pandas as pd
 
 class DataHandler:
 
@@ -99,13 +97,3 @@ class DataHandler:
             return False
 
         return True
-
-
-    def assignClassnamesToResumes(self, targets, names):
-        # reverse the one-hot encoding
-        targets = np.argmax(targets, axis = 1)
-
-        classes = [names[int(target)] for target in targets]
-        indexs = ["resume" + str(value + 1) for value in range(len(classes))]
-        table = pd.DataFrame({"class" : classes}, index = indexs)
-        return table
