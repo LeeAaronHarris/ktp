@@ -21,8 +21,11 @@ employeeResumes = handlers.DataHandler().stripInvalidCharacters(employeeResumes)
 employeeResumes = handlers.DataHandler().setAllCharactersToLowerCase(employeeResumes)
 
 # task 6 - filter the resumes into just the skills
-filteredEmployeeResumes = handlers.DataHandler().filterData(employeeResumes, filter = "skills")
+filteredEmployeeResumes_skills = handlers.DataHandler().filterData(employeeResumes, filter = "skills")
+filteredEmployeeResumes_qualifications = handlers.DataHandler().filterData(employeeResumes, filter = "degree")
+filteredEmployeeResumes_jobs = handlers.DataHandler().filterData(employeeResumes, filter = "companies worked at")
 
+print("tmp")
 # task 7 - create a model to cluster the resumes
 
 

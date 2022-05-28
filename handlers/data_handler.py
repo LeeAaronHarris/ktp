@@ -52,11 +52,12 @@ class DataHandler:
         filteredData = []
 
         for resumeIndex, resume in enumerate(data):
-            employeeDetails = ""
+            employeeDetails = []
             for detailIndex, details in enumerate(resume):
                 for value in details.values():
                     if value == filter:
-                        employeeDetails += data[resumeIndex][detailIndex]['text'] # group alll skills together in a str
+                        employeeDetails.append(data[resumeIndex][detailIndex]['text']) # group alll skills together in a str
+            employeeDetails = " ".join(employeeDetails)
             filteredData.append(employeeDetails)
         return filteredData # todo
 
