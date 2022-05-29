@@ -1,4 +1,7 @@
 import os
+
+import numpy as np
+
 import handlers
 
 # task 1 - read json
@@ -21,15 +24,26 @@ employeeResumes = handlers.DataHandler().stripInvalidCharacters(employeeResumes)
 employeeResumes = handlers.DataHandler().setAllCharactersToLowerCase(employeeResumes)
 
 # task 6 - filter the resumes into just the skills
-filteredEmployeeResumes_skills = handlers.DataHandler().filterData(employeeResumes, filter = "skills")
-filteredEmployeeResumes_qualifications = handlers.DataHandler().filterData(employeeResumes, filter = "degree")
-filteredEmployeeResumes_jobs = handlers.DataHandler().filterData(employeeResumes, filter = "companies worked at")
+filteredEmployeeResumes_skills = handlers.DataHandler().filterData(employeeResumes, filter="skills")
+filteredEmployeeResumes_qualifications = handlers.DataHandler().filterData(employeeResumes, filter="degree")
+filteredEmployeeResumes_jobs = handlers.DataHandler().filterData(employeeResumes, filter="companies worked at")
 
 # task 7 - create a model to cluster the resumes
-# sparse bag of words
-skill_counts = handlers.UnsupervisedMlHandler().count(data = filteredEmployeeResumes_skills)
-qualification_counts = handlers.UnsupervisedMlHandler().count(data = filteredEmployeeResumes_qualifications)
-jobs_counts = handlers.UnsupervisedMlHandler().count(data = filteredEmployeeResumes_jobs)
+# N-gram; frequency counts of words
+skill_counts = handlers.UnsupervisedMlHandler().countWordFrequency(data=filteredEmployeeResumes_skills)
+qualification_counts = handlers.UnsupervisedMlHandler().countWordFrequency(data=filteredEmployeeResumes_qualifications)
+jobs_counts = handlers.UnsupervisedMlHandler().countWordFrequency(data=filteredEmployeeResumes_jobs)
+
+# each piece of data can be represented as 2 Principle Components
+transformedSkills = handlers.UnsupervisedMlHandler().reduceDimensionality(data = skill_counts)
+transformedQualifications = handlers.UnsupervisedMlHandler().reduceDimensionality(data = qualification_counts)
+transformedJobs = handlers.UnsupervisedMlHandler().reduceDimensionality(data = jobs_counts)
+
+visualiseData = True
+if visualiseData:
+    handlers.DataVisualiser().visualiseData(transformedSkills)
+    handlers.DataVisualiser().visualiseData(transformedQualifications)
+    handlers.DataVisualiser().visualiseData(transformedJobs)
 
 # task 8 - create a model to score the resumes
 targets = handlers.SupervisedMlHandler().createTargetsForData(filteredEmployeeResumes_skills)
