@@ -3,6 +3,7 @@ import re as regex
 import numpy as np
 import pandas as pd
 
+
 class DataHandler:
 
     def __init__(self):
@@ -50,7 +51,7 @@ class DataHandler:
         return []
 
     # There will be a row for each resume
-    def filterData(self, data: [{}], filter : str) -> []:
+    def filterData(self, data: [{}], filter: str) -> []:
         filteredData = []
 
         for resumeIndex, resume in enumerate(data):
@@ -58,10 +59,11 @@ class DataHandler:
             for detailIndex, details in enumerate(resume):
                 for value in details.values():
                     if value == filter:
-                        employeeDetails.append(data[resumeIndex][detailIndex]['text']) # group alll skills together in a str
+                        employeeDetails.append(
+                            data[resumeIndex][detailIndex]['text'])  # group alll skills together in a str
             employeeDetails = " ".join(employeeDetails)
             filteredData.append(employeeDetails)
-        return filteredData # todo
+        return filteredData  # todo
 
     def removeSpecialCharactersFromStr(self, string: str) -> str:
         clean = regex.sub(pattern="[^A-Za-z0-9]+", repl=" ", string=string)  # didn't specify whether to clean '+'
@@ -100,12 +102,11 @@ class DataHandler:
 
         return True
 
-
     def assignClassnamesToResumes(self, targets, names):
         # reverse the one-hot encoding
-        targets = np.argmax(targets, axis = 1)
+        targets = np.argmax(targets, axis=1)
 
         classes = [names[int(target)] for target in targets]
         indexs = ["resume" + str(value + 1) for value in range(len(classes))]
-        table = pd.DataFrame({"class" : classes}, index = indexs)
+        table = pd.DataFrame({"class": classes}, index=indexs)
         return table

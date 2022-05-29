@@ -7,6 +7,10 @@
     <list default="true" id="9fc313b9-c4ba-4412-8101-acfe5b60b4d5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handlers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handlers/data_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/data_handler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handlers/data_visualiser.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/data_visualiser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handlers/employee_record_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/employee_record_handler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handlers/supervised_ml_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/supervised_ml_handler.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handlers/unsupervised_ml_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/unsupervised_ml_handler.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
@@ -114,7 +118,7 @@
       <option name="presentableId" value="Default" />
       <updated>1653769043525</updated>
       <workItem from="1653769051387" duration="79000" />
-      <workItem from="1653769143474" duration="18372000" />
+      <workItem from="1653769143474" duration="36567000" />
     </task>
     <servers />
   </component>
@@ -137,24 +141,41 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/handlers/data_handler.py</url>
-          <line>110</line>
+          <line>111</line>
           <option name="timeStamp" value="33" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/handlers/data_handler.py</url>
-          <line>109</line>
+          <line>110</line>
           <option name="timeStamp" value="35" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>48</line>
-          <option name="timeStamp" value="46" />
+          <line>71</line>
+          <option name="timeStamp" value="53" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/handlers/supervised_ml_handler.py</url>
+          <line>23</line>
+          <option name="timeStamp" value="93" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/handlers/supervised_ml_handler.py</url>
+          <line>21</line>
+          <option name="timeStamp" value="97" />
         </line-breakpoint>
       </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ktp$main.coverage" NAME="main Coverage Results" MODIFIED="1653831062307" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ktp$main.coverage" NAME="main Coverage Results" MODIFIED="1653861224442" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/ktp$.coverage" NAME=" Coverage Results" MODIFIED="1653769883781" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
   </component>
 </project>

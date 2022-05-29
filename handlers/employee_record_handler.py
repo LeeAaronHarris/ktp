@@ -1,5 +1,6 @@
 import json
 
+
 class EmployeeRecordHandler:
     """
     Handle loading employee resumes.

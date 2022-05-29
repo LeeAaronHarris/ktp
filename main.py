@@ -1,7 +1,5 @@
 import os
 
-import numpy as np
-
 import handlers
 
 # task 1 - read json
@@ -34,24 +32,42 @@ skill_counts = handlers.UnsupervisedMlHandler().countWordFrequency(data=filtered
 qualification_counts = handlers.UnsupervisedMlHandler().countWordFrequency(data=filteredEmployeeResumes_qualifications)
 jobs_counts = handlers.UnsupervisedMlHandler().countWordFrequency(data=filteredEmployeeResumes_jobs)
 
-# each piece of data can be represented as 2 Principle Components
-transformedSkills = handlers.UnsupervisedMlHandler().reduceDimensionality(data = skill_counts)
-transformedQualifications = handlers.UnsupervisedMlHandler().reduceDimensionality(data = qualification_counts)
-transformedJobs = handlers.UnsupervisedMlHandler().reduceDimensionality(data = jobs_counts)
+# each piece of data can be represented/visualised as 2 Principle Components
+visualise = True
+transformedSkills = handlers.UnsupervisedMlHandler().reduceDimensionality(data=skill_counts, visualise=visualise,
+                                                                          title="Skills")
+transformedQualifications = handlers.UnsupervisedMlHandler().reduceDimensionality(data=qualification_counts,
+                                                                                  visualise=visualise,
+                                                                                  title="Qualifications")
+transformedJobs = handlers.UnsupervisedMlHandler().reduceDimensionality(data=jobs_counts, visualise=visualise,
+                                                                        title="Jobs")
 
-visualiseData = True
-if visualiseData:
-    handlers.DataVisualiser().visualiseData(transformedSkills)
-    handlers.DataVisualiser().visualiseData(transformedQualifications)
-    handlers.DataVisualiser().visualiseData(transformedJobs)
+clusterPredictions_skills, clusterDistances_skills = handlers.UnsupervisedMlHandler().getDataClusters(transformedSkills)
+clusterPredictions_qualifications, clusterDistances_qualifications = handlers.UnsupervisedMlHandler().getDataClusters(
+    transformedQualifications)
+clusterPredictions_jobs, clusterDistances_jobs = handlers.UnsupervisedMlHandler().getDataClusters(transformedJobs)
 
 # task 8 - create a model to score the resumes
-targets = handlers.SupervisedMlHandler().createTargetsForData(filteredEmployeeResumes_skills)
+# 1) scoring - how far (according to eucliean distance) is each cluster from each center, as a percentage
+classificationPercentages_skills = handlers.UnsupervisedMlHandler().identifyGroupPercentage(clusterDistances_skills)
+classificationPercentages_qualifications = handlers.UnsupervisedMlHandler().identifyGroupPercentage(
+    clusterDistances_qualifications)
+classificationPercentages_jobs = handlers.UnsupervisedMlHandler().identifyGroupPercentage(clusterDistances_jobs)
+
+# 2) which cluster corresponds to which class? identify based on word counts of 'testing', 'development', 'management'
+classNames = ["testing", "development", "management"]
+clusterClasses_skills = handlers.UnsupervisedMlHandler().identifyClusterClasses(filteredEmployeeResumes_skills,
+                                                                                clusterPredictions_skills, classNames)
+clusterClasses_qualifications = handlers.UnsupervisedMlHandler().identifyClusterClasses(
+    filteredEmployeeResumes_qualifications, clusterPredictions_skills, classNames)
+clusterClasses_jobs = handlers.UnsupervisedMlHandler().identifyClusterClasses(filteredEmployeeResumes_jobs,
+                                                                              clusterPredictions_skills, classNames)
+
+# 3) combine the scores and decide; urgently need a test set
+clusterFrequencies = clusterClasses_skills + clusterClasses_qualifications + clusterClasses_jobs  # combined equally
+clusterClasses = handlers.UnsupervisedMlHandler().getClusterClasses(clusterFrequencies, classNames)
 
 # task 9 - create a data frame of the class for each employee
-classNames = ["testing", "development", "management"]
-singleLabelledResumes = handlers.DataHandler().assignClassnamesToResumes(targets, classNames)
-multiLabelledResumes = handlers.SupervisedMlHandler().assignScoreToEachClass(classNames)
-
+combinedData = classificationPercentages_skills + classificationPercentages_qualifications + classificationPercentages_jobs
+multiLabelledResumes = handlers.SupervisedMlHandler().assignScoreToEachResume(data=combinedData, classNames=classNames)
 print(multiLabelledResumes)
-print(singleLabelledResumes)
